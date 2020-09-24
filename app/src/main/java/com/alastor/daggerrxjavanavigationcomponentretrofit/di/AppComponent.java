@@ -1,6 +1,8 @@
-package com.alastor.daggerrxjavanavigationcomponentretrofit;
+package com.alastor.daggerrxjavanavigationcomponentretrofit.di;
 
 import android.app.Application;
+
+import com.alastor.daggerrxjavanavigationcomponentretrofit.BaseApplication;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -9,10 +11,11 @@ import dagger.android.AndroidInjector;
 
 @Component(
         modules = {
-                AndroidInjectionModule.class
+                AndroidInjectionModule.class,
+                ActivityBuildersModule.class,
         }
 )
-public interface ApplicationComponent extends AndroidInjector<BaseApplication> {
+public interface AppComponent extends AndroidInjector<BaseApplication> {
 
     @Component.Builder
     interface Builder {
@@ -20,6 +23,6 @@ public interface ApplicationComponent extends AndroidInjector<BaseApplication> {
         @BindsInstance
         Builder application(Application application);
 
-        ApplicationComponent build();
+        AppComponent build();
     }
 }
