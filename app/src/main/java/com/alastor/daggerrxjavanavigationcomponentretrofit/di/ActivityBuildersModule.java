@@ -10,4 +10,6 @@ public abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector
     abstract AuthActivity contributeAuthActivity();
+
+
 }
