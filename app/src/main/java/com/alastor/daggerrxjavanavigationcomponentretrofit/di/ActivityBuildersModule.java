@@ -1,6 +1,7 @@
 package com.alastor.daggerrxjavanavigationcomponentretrofit.di;
 
-import com.alastor.daggerrxjavanavigationcomponentretrofit.AuthActivity;
+import com.alastor.daggerrxjavanavigationcomponentretrofit.di.auth.AuthViewModelModule;
+import com.alastor.daggerrxjavanavigationcomponentretrofit.ui.auth.AuthActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -8,7 +9,9 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuildersModule {
 
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(
+            modules = {AuthViewModelModule.class}
+    )
     abstract AuthActivity contributeAuthActivity();
 
 }
