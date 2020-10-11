@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 
 import com.alastor.daggerrxjavanavigationcomponentretrofit.BaseApplication;
+import com.alastor.daggerrxjavanavigationcomponentretrofit.SessionManager;
 
 import javax.inject.Singleton;
 
@@ -23,6 +24,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> {
+
+    SessionManager sessionManager();
 
     @Component.Builder
     interface Builder {
