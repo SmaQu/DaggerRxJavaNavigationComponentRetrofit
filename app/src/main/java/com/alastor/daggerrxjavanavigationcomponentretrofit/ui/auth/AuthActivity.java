@@ -1,5 +1,6 @@
 package com.alastor.daggerrxjavanavigationcomponentretrofit.ui.auth;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alastor.daggerrxjavanavigationcomponentretrofit.R;
-import com.alastor.daggerrxjavanavigationcomponentretrofit.models.User;
+import com.alastor.daggerrxjavanavigationcomponentretrofit.ui.main.MainActivity;
 import com.alastor.daggerrxjavanavigationcomponentretrofit.viewmodels.ViewModelProviderFactory;
 import com.bumptech.glide.RequestManager;
 
@@ -59,25 +59,32 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     private void subscribeObserver() {
         authViewModel.observeAuthState().observe(this, userAuthResource -> {
             if (userAuthResource != null) {
-               switch (userAuthResource.status) {
-                   case LOADING:
-                       showProgressBar(true);
-                       break;
-                   case AUTHENTICATED:
-                       showProgressBar(false);
-                       Log.d(TAG, "onChanged: LOGIN SUCCESS: " + userAuthResource.data.getEmail());
-                       break;
-                   case ERROR:
-                       showProgressBar(false);
-                       Toast.makeText(AuthActivity.this, userAuthResource.message
-                               + "\nDid you enter a number between 1 and 10?", Toast.LENGTH_SHORT).show();
-                       break;
-                   case NOT_AUTHENTICATED:
-                       showProgressBar(false);
-                       break;
-               }
+                switch (userAuthResource.status) {
+                    case LOADING:
+                        showProgressBar(true);
+                        break;
+                    case AUTHENTICATED:
+                        showProgressBar(false);
+                        Log.d(TAG, "onChanged: LOGIN SUCCESS: " + userAuthResource.data.getEmail());
+                        onLoginSuccess();
+                        break;
+                    case ERROR:
+                        showProgressBar(false);
+                        Toast.makeText(AuthActivity.this, userAuthResource.message
+                                + "\nDid you enter a number between 1 and 10?", Toast.LENGTH_SHORT).show();
+                        break;
+                    case NOT_AUTHENTICATED:
+                        showProgressBar(false);
+                        break;
+                }
             }
         });
+    }
+
+    private void onLoginSuccess() {
+        final Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showProgressBar(boolean isVisible) {
@@ -87,6 +94,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
             progressBar.setVisibility(View.INVISIBLE);
         }
     }
+
     private void setLogo() {
         requestManager
                 .load(logo)

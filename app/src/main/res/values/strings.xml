@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">DaggerRxJavaNavigationComponentRetrofit</string>
+    <string name="app_name">DaggerIsLife</string>
+    <string name="logout">logout</string>
 </resources>
