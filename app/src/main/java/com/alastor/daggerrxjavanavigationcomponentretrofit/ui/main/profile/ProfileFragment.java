@@ -1,6 +1,7 @@
 package com.alastor.daggerrxjavanavigationcomponentretrofit.ui.main.profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,14 @@ public class ProfileFragment extends DaggerFragment {
         website = view.findViewById(R.id.website);
 
         viewModel = new ViewModelProvider(this, providerFactory).get(ProfileViewModel.class);
+
         subscribeObservers();
     }
 
     private void subscribeObservers() {
         viewModel.getAuthenticatedUser().removeObservers(getViewLifecycleOwner());
         viewModel.getAuthenticatedUser().observe(getViewLifecycleOwner(), authResource -> {
-            if (authResource != null)  {
+            if (authResource != null) {
                 switch (authResource.status) {
                     case AUTHENTICATED:
                         setUserDetails(authResource.data);

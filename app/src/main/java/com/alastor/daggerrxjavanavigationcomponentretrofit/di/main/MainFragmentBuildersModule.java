@@ -1,5 +1,6 @@
 package com.alastor.daggerrxjavanavigationcomponentretrofit.di.main;
 
+import com.alastor.daggerrxjavanavigationcomponentretrofit.di.auth.AuthScope;
 import com.alastor.daggerrxjavanavigationcomponentretrofit.ui.main.posts.PostsFragment;
 import com.alastor.daggerrxjavanavigationcomponentretrofit.ui.main.profile.ProfileFragment;
 
